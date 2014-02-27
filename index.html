@@ -16,8 +16,8 @@
   </head>
   <body>
     <h2>Todo</h2>
-    <div ng-controller="TodoCtrl">
-      <span>{{remaining()}} of {{todos.length}} remaining</span>
+    <div class="page-container" ng-controller="TodoCtrl">
+ <!--     <span>{{remaining()}} of {{todos.length}} remaining</span>
       [ <a href="" ng-click="archive()">archive</a> ]
       <ul class="unstyled">
         <li ng-repeat="todo in todos">
@@ -25,20 +25,43 @@
           <span class="done-{{todo.done}}">{{todo.text}}</span>
         </li>
       </ul>
-      <form ng-submit="addPageTemplate()">
+      <form ng-submit="addTodo()">
         <input type="text" ng-model="todoText"  size="30"
                placeholder="add new todo here">
         <input class="btn-primary" type="submit" value="add">
       </form>
-<!--       <br><br><br>
+       <br><br><br>
       {{todos}}
-      <br><br>-->
+      <br><br>
       <hr>
       <br><br>
-      <!-- {{portfolio[0].id}}  -->
-      <div ng-repeat="pagetemplate in portfolio">
-        <input type="text" ng-model="pagetemplate.description"  size="30">
-        {{pagetemplate}}<br><br>
+      {{portfolio[0].id}}  -->
+      
+      <div class="main-container">
+        <div class="large-image">
+            <img src="/img/large/{{portfolio[0].largepic}}" />
+        </div> 
+        
+        <div class="details-container">
+            <form ng-submit="addPageTemplate()">
+                <label class="field-label" for="pid">ID:</label><input class="form-field" type="text" name="pid" id="pid" ng-model="id"><br>
+                <label class="field-label" for="title">Title:</label><input class="form-field" type="text" name="title" id="title" ng-model="title"><br>
+                <label class="field-label" for="description">Description:</label><input class="form-field" type="text" name="description" id="description" ng-model="description"><br>
+                <label class="field-label" for="cost">Cost:</label><input class="form-field" type="text" name="cost" id="cost" ng-model="cost"><br>
+                <label class="field-label" for="smallpic">Small Pic:</label><input class="form-field" type="text" name="smallpic" id="smallpic" ng-model="smallpic"><br>
+                <label class="field-label" for="largepic">Large Pic:</label><input class="form-field" type="text" name="largepic" id="largepic" ng-model="largepic"><br>
+                <input class="btn-primary" type="submit" value="add" />
+            </form>
+        </div>
+      </div>
+      <div style="clear:both"></div>
+      <div class="carousel-container" ng-repeat="pagetemplate in portfolio">
+        <div class="carousel-viewport">
+            <div class="carousel-item">
+                <img src="/img/thumbnails/{{pagetemplate.smallpic}}" /><br>
+                {{pagetemplate.title}}
+            </div>
+        </div>
       </div>
     </div>
   </body>

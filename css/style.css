@@ -2,3 +2,26 @@
   text-decoration: line-through;
   color: grey;
 }
+
+.main-container {
+    clear:both;
+}
+
+.large-image {
+    float:left;
+}
+
+.details-container {
+    float:left;
+}
+
+.carousel-item {
+    float:left;
+}
+
+.field-label {
+    width: 5em;
+	float: left;
+	text-align: right;
+	margin-right: 0.5em;
+}
