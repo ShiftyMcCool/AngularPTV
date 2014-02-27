@@ -1,0 +1,66 @@
+<portfolio>
+	<pagetemplate>
+		<id>7111</id>
+		<title>The 7111 title</title>
+		<description>description of 7111</description>
+		<cost>11</cost>
+		<smallpic>7111-m.jpg</smallpic>
+		<largepic>7111-b.jpg</largepic>
+	</pagetemplate>
+	<pagetemplate>
+		<id>7112</id>
+		<title>The 7112 title</title>
+		<description>description of 7112</description>
+		<cost>12</cost>
+		<smallpic>7112-m.jpg</smallpic>
+		<largepic>7112-b.jpg</largepic>
+	</pagetemplate>
+	<pagetemplate>
+		<id>7118</id>
+		<title>The 7118 title</title>
+		<description>description of 7118</description>
+		<cost>18</cost>
+		<smallpic>7118-m.jpg</smallpic>
+		<largepic>7118-b.jpg</largepic>
+	</pagetemplate>
+	<pagetemplate>
+		<id>7124</id>
+		<title>The 7124 title</title>
+		<description>description of 7124</description>
+		<cost>24</cost>
+		<smallpic>7124-m.jpg</smallpic>
+		<largepic>7124-b.jpg</largepic>
+	</pagetemplate>
+	<pagetemplate>
+		<id>7130</id>
+		<title>The 7130 title</title>
+		<description>description of 7130</description>
+		<cost>30</cost>
+		<smallpic>7130-m.jpg</smallpic>
+		<largepic>7130-b.jpg</largepic>
+	</pagetemplate>
+	<pagetemplate>
+		<id>7131</id>
+		<title>The 7131 title</title>
+		<description>description of 7131</description>
+		<cost>31</cost>
+		<smallpic>7131-m.jpg</smallpic>
+		<largepic>7131-b.jpg</largepic>
+	</pagetemplate>
+	<pagetemplate>
+		<id>7141</id>
+		<title>The 7141 title</title>
+		<description>description of 7141</description>
+		<cost>41</cost>
+		<smallpic>7141-m.jpg</smallpic>
+		<largepic>7141-b.jpg</largepic>
+	</pagetemplate>
+	<pagetemplate>
+		<id>7143</id>
+		<title>The 7143 title</title>
+		<description>description of 7143</description>
+		<cost>43</cost>
+		<smallpic>7143-m.jpg</smallpic>
+		<largepic>7143-b.jpg</largepic>
+	</pagetemplate>
+</portfolio>
