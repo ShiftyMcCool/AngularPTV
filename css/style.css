@@ -1,27 +1,83 @@
+body {
+  background: #eee;
+  color: #333;
+  font: normal 13px/1.625 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 50px;
+  text-align: center;
+}
+
+header {
+  border-bottom: 1px solid #ddd;
+  font-size: 28px;
+  padding: 0 0 7px;
+}
+
+.page-container {
+  background: #fff;
+  border: 1px solid #ccc;
+  -webkit-box-shadow: 0px 0px 12px rgba(0,0,0,.3);
+  -moz-box-shadow: 0px 0px 12px rgba(0,0,0,.3);
+  box-shadow: 0px 0px 12px rgba(0,0,0,.3);
+  margin: 0 auto;
+  padding: 25px;
+  height: 700px;
+  width: 860px;
+}
+
 .done-true {
   text-decoration: line-through;
   color: grey;
 }
 
 .main-container {
-    clear:both;
+  clear:both;
+}
+
+.large-image-container {
+  -webkit-box-shadow: 0px 0px 6px rgba(0,0,0,.3);
+  -moz-box-shadow: 0px 0px 6px rgba(0,0,0,.3);
+  box-shadow: 0px 0px 6px rgba(0,0,0,.3);
+  float:left;
 }
 
 .large-image {
-    float:left;
+  height:360px;
+  width:430px
 }
 
 .details-container {
-    float:left;
+  float:left;
 }
 
 .carousel-item {
-    float:left;
+  float:left;
 }
 
 .field-label {
-    width: 5em;
+  width: 5em;
 	float: left;
 	text-align: right;
 	margin-right: 0.5em;
+}
+
+.carousel-viewport-container {
+  float: left;
+}
+
+.page-button {
+  position:relative;
+  float: left;
+  top:40px;
+  background-color: #ffffff;
+  border: none;
+}
+
+.page-button-disabled {
+  visibility: hidden;
+}
+
+.carousel-img {
+  height:120px;
+  width:150px;
 }

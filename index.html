@@ -1,67 +1,52 @@
 <!doctype html>
-<html ng-app>
+<html ng-app="myApp">
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js"></script>
-    <!--
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-	-->
-	<script src="/js/xml2json.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular-route.js"></script>
+    <script src="/js/xml2json.min.js"></script>
     <script src="/js/pageTemplate.js"></script>
 
-    <!--
-    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
-	-->
     <link rel="stylesheet" href="css/style.css">
   </head>
+
   <body>
-    <h2>Todo</h2>
-    <div class="page-container" ng-controller="TodoCtrl">
- <!--     <span>{{remaining()}} of {{todos.length}} remaining</span>
-      [ <a href="" ng-click="archive()">archive</a> ]
-      <ul class="unstyled">
-        <li ng-repeat="todo in todos">
-          <input type="checkbox" ng-model="todo.done">
-          <span class="done-{{todo.done}}">{{todo.text}}</span>
-        </li>
-      </ul>
-      <form ng-submit="addTodo()">
-        <input type="text" ng-model="todoText"  size="30"
-               placeholder="add new todo here">
-        <input class="btn-primary" type="submit" value="add">
-      </form>
-       <br><br><br>
-      {{todos}}
-      <br><br>
-      <hr>
-      <br><br>
-      {{portfolio[0].id}}  -->
-      
+    <div class="page-container" ng-controller="PageTemplateController">
+      <header>Development Project</header>
+
       <div class="main-container">
-        <div class="large-image">
-            <img src="/img/large/{{portfolio[0].largepic}}" />
+        <div class="large-image-container">
+            <img class="large-image" src="/img/large/{{largepic}}" />
         </div> 
         
         <div class="details-container">
-            <form ng-submit="addPageTemplate()">
-                <label class="field-label" for="pid">ID:</label><input class="form-field" type="text" name="pid" id="pid" ng-model="id"><br>
-                <label class="field-label" for="title">Title:</label><input class="form-field" type="text" name="title" id="title" ng-model="title"><br>
-                <label class="field-label" for="description">Description:</label><input class="form-field" type="text" name="description" id="description" ng-model="description"><br>
-                <label class="field-label" for="cost">Cost:</label><input class="form-field" type="text" name="cost" id="cost" ng-model="cost"><br>
-                <label class="field-label" for="smallpic">Small Pic:</label><input class="form-field" type="text" name="smallpic" id="smallpic" ng-model="smallpic"><br>
-                <label class="field-label" for="largepic">Large Pic:</label><input class="form-field" type="text" name="largepic" id="largepic" ng-model="largepic"><br>
-                <input class="btn-primary" type="submit" value="add" />
-            </form>
+          <label class="field-label" for="pid">ID:</label><span id="pid">{{id}}<br>
+          <label class="field-label" for="title">Title:</label><span id="title">{{title}}<br>
+          <label class="field-label" for="description">Description:</label><span id="description">{{description}}<br>
+          <label class="field-label" for="cost">Cost:</label><span id="cost">{{cost | currency}}<br>
+          <label class="field-label" for="smallpic">Small Pic:</label><span id="smallpic">{{smallpic}}<br>
+          <label class="field-label" for="largepic">Large Pic:</label><span id="largepic">{{largepic}}<br>
         </div>
       </div>
+
       <div style="clear:both"></div>
-      <div class="carousel-container" ng-repeat="pagetemplate in portfolio">
-        <div class="carousel-viewport">
-            <div class="carousel-item">
-                <img src="/img/thumbnails/{{pagetemplate.smallpic}}" /><br>
-                {{pagetemplate.title}}
-            </div>
+      
+      <div class="carousel-container">
+        <button class='{{prevClass}}' ng-disabled="prevEnabled()" ng-click="currentPage=currentPage-1">
+            <img src="/img/previous.png" />
+        </button>
+
+        <div class="carousel-viewport-container" ng-repeat="pagetemplate in portfolio | startFrom:currentPage*pageSize | limitTo:pageSize">
+          <div class="carousel-viewport">
+              <div class="carousel-item" ng-click="showPageTemplate(pagetemplate.id)">
+                  <img class="carousel-img" src="/img/thumbnails/{{pagetemplate.smallpic}}" /><br>
+                  {{pagetemplate.title}}
+              </div>
+          </div>
         </div>
+
+        <button class="{{nextClass}}" ng-disabled="nextEnabled()" ng-click="currentPage=currentPage+1">
+          <img src="/img/next.png" />
+        </button>
       </div>
     </div>
   </body>

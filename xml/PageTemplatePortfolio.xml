@@ -63,4 +63,12 @@
 		<smallpic>7143-m.jpg</smallpic>
 		<largepic>7143-b.jpg</largepic>
 	</pagetemplate>
+	<pagetemplate>
+		<id>7147</id>
+		<title>The 7147 title</title>
+		<description>description of 7147</description>
+		<cost>47</cost>
+		<smallpic>7147-m.jpg</smallpic>
+		<largepic>7147-b.jpg</largepic>
+	</pagetemplate>
 </portfolio>
