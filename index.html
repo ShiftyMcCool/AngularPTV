@@ -7,46 +7,54 @@
     <script src="/js/pageTemplate.js"></script>
 
     <link rel="stylesheet" href="css/style.css">
+
+    <title>Code Development Project</title>
   </head>
 
   <body>
     <div class="page-container" ng-controller="PageTemplateController">
-      <header>Development Project</header>
+      <header>Code Development Project</header>
 
-      <div class="main-container">
+      <div class="container-divider"></div>
+
+      <div class="viewport-container">
         <div class="large-image-container">
             <img class="large-image" src="/img/large/{{largepic}}" />
         </div> 
         
         <div class="details-container">
-          <label class="field-label" for="pid">ID:</label><span id="pid">{{id}}<br>
-          <label class="field-label" for="title">Title:</label><span id="title">{{title}}<br>
-          <label class="field-label" for="description">Description:</label><span id="description">{{description}}<br>
-          <label class="field-label" for="cost">Cost:</label><span id="cost">{{cost | currency}}<br>
-          <label class="field-label" for="smallpic">Small Pic:</label><span id="smallpic">{{smallpic}}<br>
-          <label class="field-label" for="largepic">Large Pic:</label><span id="largepic">{{largepic}}<br>
+          <p><label class="field-label" for="title">Title:</label><span id="title">{{title}}<br></p>
+          <p><label class="field-label" for="description">Description:</label><span id="description">{{description}}<br></p>
+          <p><label class="field-label" for="cost">Cost:</label><span id="cost">{{cost | currency}}<br></p>
+          <p><label class="field-label" for="pid">ID#:</label><span id="pid">{{id}}<br></p>
+          <p><label class="field-label" for="smallpic">Thumbnail File:</label><span id="smallpic">{{smallpic}}<br></p>
+          <p><label class="field-label" for="largepic">Large Image File:</label><span id="largepic">{{largepic}}<br></p>
         </div>
       </div>
 
-      <div style="clear:both"></div>
+      <div class="container-divider"></div>
       
       <div class="carousel-container">
-        <button class='{{prevClass}}' ng-disabled="prevEnabled()" ng-click="currentPage=currentPage-1">
-            <img src="/img/previous.png" />
-        </button>
+        <div class="button-container">
+          <button class='{{prevClass}}' ng-disabled="prevEnabled()" ng-click="currentPage=currentPage-1">
+              <img src="/img/previous.png" />
+          </button>
+        </div>
 
         <div class="carousel-viewport-container" ng-repeat="pagetemplate in portfolio | startFrom:currentPage*pageSize | limitTo:pageSize">
           <div class="carousel-viewport">
               <div class="carousel-item" ng-click="showPageTemplate(pagetemplate.id)">
-                  <img class="carousel-img" src="/img/thumbnails/{{pagetemplate.smallpic}}" /><br>
-                  {{pagetemplate.title}}
+                <img class="carousel-img" src="/img/thumbnails/{{pagetemplate.smallpic}}" /><br>
+                <a href="#" class="carousel-item-link"> {{pagetemplate.title}}</a>                  
               </div>
           </div>
         </div>
 
-        <button class="{{nextClass}}" ng-disabled="nextEnabled()" ng-click="currentPage=currentPage+1">
-          <img src="/img/next.png" />
-        </button>
+        <div class="button-container">
+          <button class="{{nextClass}}" ng-disabled="nextEnabled()" ng-click="currentPage=currentPage+1">
+            <img src="/img/next.png" />
+          </button>
+        </div>
       </div>
     </div>
   </body>

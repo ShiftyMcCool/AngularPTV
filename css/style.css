@@ -21,16 +21,24 @@ header {
   box-shadow: 0px 0px 12px rgba(0,0,0,.3);
   margin: 0 auto;
   padding: 25px;
-  height: 700px;
+  height: 650px;
   width: 860px;
+}
+
+.container-divider {
+  clear:both;
+  height:20px;
 }
 
 .done-true {
   text-decoration: line-through;
-  color: grey;
+  color: #ddd;
 }
 
-.main-container {
+.viewport-container {
+  width: 700px;
+  margin-right: auto;
+  margin-left: auto;
   clear:both;
 }
 
@@ -55,22 +63,41 @@ header {
 }
 
 .field-label {
-  width: 5em;
 	float: left;
 	text-align: right;
 	margin-right: 0.5em;
 }
 
+.carousel-container {
+  height:150px;
+  width:730px;
+  margin-left: auto;
+  margin-right: auto;
+  padding:10px;
+  border:thin solid #ddd;
+  -webkit-box-shadow: 0px 0px 12px rgba(0,0,0,.3);
+  -moz-box-shadow: 0px 0px 12px rgba(0,0,0,.3);
+  box-shadow: 0px 0px 6px rgba(0,0,0,.3);
+  -moz-border-radius: 2px; -webkit-border-radius: 5px; border-radius: 5px;
+}
+
 .carousel-viewport-container {
+  margin-right: auto;
+  margin-left: auto;
   float: left;
 }
 
 .page-button {
   position:relative;
   float: left;
-  top:40px;
+  top:45px;
   background-color: #ffffff;
   border: none;
+  cursor: pointer;
+}
+
+.page-button:hover {
+  opacity: .6;
 }
 
 .page-button-disabled {
@@ -80,4 +107,49 @@ header {
 .carousel-img {
   height:120px;
   width:150px;
+  border: thick solid #fff;
+  -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;
+  cursor: pointer;
+}
+
+.carousel-img:hover {
+  border: thick solid #eee;
+}
+
+.carousel-item-link {
+  background: #eee;
+  -moz-border-radius: 22px; -webkit-border-radius: 22px; border-radius: 22px;
+  font-weight: bold;
+  font-size: 12px;
+  margin: 5px auto 0 auto;
+  padding: 2px 15px;
+  text-decoration: none;
+}
+
+.button-container {
+  float:left;
+  width:45px;
+}
+
+.details-container {
+  border-bottom: 1px solid #ddd;
+  float: right;
+  text-align: left;
+  width: 250px;
+}
+
+.details-container p {
+  border-top: 1px solid #ddd;
+  font-size: 12px;
+  margin: 0;
+  padding: 7px 0;
+}
+
+.details-container label {
+  background: #555;
+  color: #fff;
+  font-size: 10px;
+  font-weight: normal;
+  padding: 2px 5px;
+  text-transform: uppercase;
 }
