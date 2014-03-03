@@ -1,14 +1,58 @@
-var app=angular.module('myApp', []);
+var app=angular.module('myApp', ['ngRoute'],
+  function($routeProvider) {
+    $routeProvider
+    .when('/', {
+      templateUrl:'/views/detail.html'
+    })
+    .when('/detail/:pageTemplateID', {
+      controller:'DetailController',
+      templateUrl:'/views/detail.html'
+    })
+    .when('/edit/:pageTemplateID', {
+      controller:'EditController',
+      templateUrl:'/views/edit.html'
+    })
+    .when('/new', {
+      controller:'CreateController',
+      templateUrl:'/views/edit.html'
+    })
+    .otherwise({
+      redirectTo:'/'
+    });
+});
 
-function PageTemplateController($scope,$http) {
-  $http.get('/xml/PageTemplatePortfolio.xml', {
-    transformResponse:function(data) {
-      var x2js = new X2JS();
-      var json = x2js.xml_str2json( data ).portfolio.pagetemplate;
-      return json;
+app.factory('portfolio', function($http){
+  return {
+    getPortfolio: function() {
+      return $http.get('/xml/PageTemplatePortfolio.xml', {
+        transformResponse:function(data) {
+          var x2js = new X2JS();
+          var json = x2js.xml_str2json( data ).portfolio.pagetemplate;
+          console.log(json);
+          return json;
+        }
+      });
+    },
+    setPageData: function($scope,id) {
+      angular.forEach($scope.portfolio, function(value, key){
+        if(value.id == id){
+          $scope.ptIndex = key;
+          $scope.id = value.id;
+          $scope.title = value.title;
+          $scope.description = value.description;
+          $scope.cost = value.cost;
+          $scope.smallpic = value.smallpic;
+          $scope.largepic = value.largepic;
+        }
+      });
     }
-  })
-  .success(function(data, status) {
+  };
+});
+
+function PageTemplateController($scope,$route,$location,portfolio) {
+  $scope.portfolio = [];
+
+  var handleSuccess = function(data, status) {
     $scope.portfolio = data;
     $scope.id = data[0].id;
     $scope.title = data[0].title;
@@ -18,32 +62,9 @@ function PageTemplateController($scope,$http) {
     $scope.largepic = data[0].largepic;
     $scope.currentPage = 0;
     $scope.pageSize = 4;
-  });
-
-  $scope.addPageTemplate = function() {
-      console.log($scope.title);
-      $scope.portfolio.push({
-      id:$scope.id, 
-      title:$scope.title,
-      description:$scope.description,
-      cost:$scope.cost,
-      smallpic:$scope.smallpic,
-      largepic:$scope.largepic
-    });
   };
 
-  $scope.showPageTemplate = function(id) {
-    angular.forEach($scope.portfolio, function(value, key){
-      if(value.id == id){
-        $scope.id = value.id;
-        $scope.title = value.title;
-        $scope.description = value.description;
-        $scope.cost = value.cost;
-        $scope.smallpic = value.smallpic;
-        $scope.largepic = value.largepic;
-      }
-    });
-  };
+  portfolio.getPortfolio().success(handleSuccess);
 
   $scope.prevEnabled = function() {
     if($scope.currentPage == 0) {
@@ -65,6 +86,49 @@ function PageTemplateController($scope,$http) {
       $scope.nextClass = 'page-button';
       return false;
     }
+  };
+
+  $scope.go = function ( path,id ) {
+    if(id != 'undefined') {
+      path = path+id;
+    } 
+
+    $location.path( path );
+  };
+}
+
+function DetailController($scope,$routeParams,portfolio) {
+  portfolio.setPageData($scope,$routeParams.pageTemplateID);
+}
+
+function EditController($scope,$routeParams,$location,portfolio) {
+  portfolio.setPageData($scope,$routeParams.pageTemplateID);
+
+  var ptIndex = $scope.ptIndex;
+  
+  $scope.editPageTemplate = function() {
+    $scope.portfolio[ptIndex].id = $scope.id;
+    $scope.portfolio[ptIndex].title = $scope.title;
+    $scope.portfolio[ptIndex].description = $scope.description;
+    $scope.portfolio[ptIndex].cost = $scope.cost;
+    $scope.portfolio[ptIndex].smallpic = $scope.smallpic;
+    $scope.portfolio[ptIndex].largepic = $scope.largepic;
+
+    $location.path('/detail/'+$scope.id);
+  };
+}
+
+function CreateController($scope) {
+ $scope.addPageTemplate = function() {
+    $scope.portfolio.push({
+      id:$scope.id, 
+      title:$scope.title,
+      description:$scope.description,
+      cost:$scope.cost,
+      smallpic:$scope.smallpic,
+      largepic:$scope.largepic
+    });
+
   };
 }
 

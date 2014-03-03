@@ -17,20 +17,7 @@
 
       <div class="container-divider"></div>
 
-      <div class="viewport-container">
-        <div class="large-image-container">
-            <img class="large-image" src="/img/large/{{largepic}}" />
-        </div> 
-        
-        <div class="details-container">
-          <p><label class="field-label" for="title">Title:</label><span id="title">{{title}}<br></p>
-          <p><label class="field-label" for="description">Description:</label><span id="description">{{description}}<br></p>
-          <p><label class="field-label" for="cost">Cost:</label><span id="cost">{{cost | currency}}<br></p>
-          <p><label class="field-label" for="pid">ID#:</label><span id="pid">{{id}}<br></p>
-          <p><label class="field-label" for="smallpic">Thumbnail File:</label><span id="smallpic">{{smallpic}}<br></p>
-          <p><label class="field-label" for="largepic">Large Image File:</label><span id="largepic">{{largepic}}<br></p>
-        </div>
-      </div>
+      <div class="viewport-container" ng-view></div>
 
       <div class="container-divider"></div>
       
@@ -43,9 +30,9 @@
 
         <div class="carousel-viewport-container" ng-repeat="pagetemplate in portfolio | startFrom:currentPage*pageSize | limitTo:pageSize">
           <div class="carousel-viewport">
-              <div class="carousel-item" ng-click="showPageTemplate(pagetemplate.id)">
+              <div class="carousel-item" ng-click="go('/detail/',pagetemplate.id)">
                 <img class="carousel-img" src="/img/thumbnails/{{pagetemplate.smallpic}}" /><br>
-                <a href="#" class="carousel-item-link"> {{pagetemplate.title}}</a>                  
+                <a class="carousel-item-link">{{pagetemplate.title}}</a>                  
               </div>
           </div>
         </div>

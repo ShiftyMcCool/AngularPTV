@@ -60,6 +60,7 @@ header {
 
 .carousel-item {
   float:left;
+  cursor: pointer;
 }
 
 .field-label {
@@ -109,7 +110,6 @@ header {
   width:150px;
   border: thick solid #fff;
   -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;
-  cursor: pointer;
 }
 
 .carousel-img:hover {
