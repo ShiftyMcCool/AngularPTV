@@ -3,13 +3,13 @@
 </div> 
 
 <div class="details-container">
-  <form ng-submit="editPageTemplate()" ng-controller="EditController">
-    <p><label class="field-label" for="pid">ID:</label><input class="form-field" type="text" name="pid" id="pid" ng-model="id"><br></p>
-    <p><label class="field-label" for="title">Title:</label><input class="form-field" type="text" name="title" id="title" ng-model="title"><br></p>
-    <p><label class="field-label" for="description">Description:</label><input class="form-field" type="text" name="description" id="description" ng-model="description"><br></p>
-    <p><label class="field-label" for="cost">Cost:</label><input class="form-field" type="text" name="cost" id="cost" ng-model="cost"><br></p>
-    <p><label class="field-label" for="smallpic">Small Pic:</label><input class="form-field" type="text" name="smallpic" id="smallpic" ng-model="smallpic"><br></p>
-    <p><label class="field-label" for="largepic">Large Pic:</label><input class="form-field" type="text" name="largepic" id="largepic" ng-model="largepic"><br></p>
+  <form ng-submit="editPageTemplate()">
+    <p><label class="field-label" for="title">Title</label><input class="form-field" type="text" name="title" id="title" ng-model="title"><br></p>
+    <p><label class="field-label" for="description">Description</label><input class="form-field" type="text" name="description" id="description" ng-model="description"><br></p>
+    <p><label class="field-label" for="cost">Cost</label><input class="form-field" type="text" name="cost" id="cost" ng-model="cost"><br></p>
+    <p><label class="field-label" for="pid">ID#</label><input class="form-field" type="text" name="pid" id="pid" ng-model="id"><br></p>
+    <p><label class="field-label" for="smallpic">Thumbnail File</label><input class="form-field" type="text" name="smallpic" id="smallpic" ng-model="smallpic"><br></p>
+    <p><label class="field-label" for="largepic">Large Image File</label><input class="form-field" type="text" name="largepic" id="largepic" size="18" ng-model="largepic"><br></p>
     <p>
 		<input class="btn-primary" type="submit" value="Save" />
 		<input type="button" value="Cancel" ng-click="go('/detail/',id)" />

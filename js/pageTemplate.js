@@ -49,7 +49,7 @@ app.factory('portfolio', function($http){
   };
 });
 
-function PageTemplateController($scope,$route,$location,portfolio) {
+app.controller('PageTemplateController', function($scope,$route,$location,portfolio) {
   $scope.portfolio = [];
 
   var handleSuccess = function(data, status) {
@@ -89,19 +89,19 @@ function PageTemplateController($scope,$route,$location,portfolio) {
   };
 
   $scope.go = function ( path,id ) {
-    if(id != 'undefined') {
+    if(typeof id != 'undefined') {
       path = path+id;
     } 
 
     $location.path( path );
   };
-}
+});
 
-function DetailController($scope,$routeParams,portfolio) {
+app.controller('DetailController', function($scope,$routeParams,portfolio) {
   portfolio.setPageData($scope,$routeParams.pageTemplateID);
-}
+});
 
-function EditController($scope,$routeParams,$location,portfolio) {
+app.controller('EditController', function($scope,$routeParams,$location,portfolio) {
   portfolio.setPageData($scope,$routeParams.pageTemplateID);
 
   var ptIndex = $scope.ptIndex;
@@ -116,9 +116,9 @@ function EditController($scope,$routeParams,$location,portfolio) {
 
     $location.path('/detail/'+$scope.id);
   };
-}
+});
 
-function CreateController($scope) {
+app.controller('CreateController', function($scope) {
  $scope.addPageTemplate = function() {
     $scope.portfolio.push({
       id:$scope.id, 
@@ -129,8 +129,9 @@ function CreateController($scope) {
       largepic:$scope.largepic
     });
 
+    $location.path('/detail/'+$scope.id);
   };
-}
+});
 
 app.filter('startFrom', function() {
     return function(input, start) {

@@ -3,11 +3,14 @@
 </div> 
 
 <div class="details-container">
-  <p><label class="field-label" for="title">Title:</label><span id="title">{{title}}<br></p>
-  <p><label class="field-label" for="description">Description:</label><span id="description">{{description}}<br></p>
-  <p><label class="field-label" for="cost">Cost:</label><span id="cost">{{cost | currency}}<br></p>
-  <p><label class="field-label" for="pid">ID#:</label><span id="pid">{{id}}<br></p>
-  <p><label class="field-label" for="smallpic">Thumbnail File:</label><span id="smallpic">{{smallpic}}<br></p>
-  <p><label class="field-label" for="largepic">Large Image File:</label><span id="largepic">{{largepic}}<br></p>
-  <input type="button" value="Edit" ng-click="go('/edit/',id)" />
+  <p><label class="field-label" for="title">Title</label><span id="title">{{title}}<br></p>
+  <p><label class="field-label" for="description">Description</label><span id="description">{{description}}<br></p>
+  <p><label class="field-label" for="cost">Cost</label><span id="cost">{{cost | currency}}<br></p>
+  <p><label class="field-label" for="pid">ID#</label><span id="pid">{{id}}<br></p>
+  <p><label class="field-label" for="smallpic">Thumbnail File</label><span id="smallpic">{{smallpic}}<br></p>
+  <p><label class="field-label" for="largepic">Large Image File</label><span id="largepic">{{largepic}}<br></p>
+  <p>
+  	<input type="button" value="Edit" ng-click="go('/edit/',id)" />
+  	<input type="button" value="Add" ng-click="go('/new')" />
+  </p>
 </div>
