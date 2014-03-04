@@ -37,12 +37,7 @@ app.factory('portfolio', function($http){
       angular.forEach($scope.portfolio, function(value, key){
         if(value.id == id){
           $scope.ptIndex = key;
-          $scope.id = value.id;
-          $scope.title = value.title;
-          $scope.description = value.description;
-          $scope.cost = value.cost;
-          $scope.smallpic = value.smallpic;
-          $scope.largepic = value.largepic;
+          $scope.thisTemplate = angular.copy($scope.portfolio[key]);
         }
       });
     }
@@ -51,15 +46,10 @@ app.factory('portfolio', function($http){
 
 app.controller('PageTemplateController', function($scope,$route,$location,portfolio) {
   $scope.portfolio = [];
+  $scope.ptIndex = 0;
 
   var handleSuccess = function(data, status) {
     $scope.portfolio = data;
-    $scope.id = data[0].id;
-    $scope.title = data[0].title;
-    $scope.description = data[0].description;
-    $scope.cost = data[0].cost;
-    $scope.smallpic = data[0].smallpic;
-    $scope.largepic = data[0].largepic;
     $scope.currentPage = 0;
     $scope.pageSize = 4;
   };
@@ -107,29 +97,24 @@ app.controller('EditController', function($scope,$routeParams,$location,portfoli
   var ptIndex = $scope.ptIndex;
   
   $scope.editPageTemplate = function() {
-    $scope.portfolio[ptIndex].id = $scope.id;
-    $scope.portfolio[ptIndex].title = $scope.title;
-    $scope.portfolio[ptIndex].description = $scope.description;
-    $scope.portfolio[ptIndex].cost = $scope.cost;
-    $scope.portfolio[ptIndex].smallpic = $scope.smallpic;
-    $scope.portfolio[ptIndex].largepic = $scope.largepic;
-
-    $location.path('/detail/'+$scope.id);
+    $scope.portfolio[ptIndex] = $scope.thisTemplate;
+    $scope.thisTemplate = "";
+    $scope.go('/detail/'+$scope.portfolio[ptIndex].id);
   };
 });
 
 app.controller('CreateController', function($scope) {
  $scope.addPageTemplate = function() {
     $scope.portfolio.push({
-      id:$scope.id, 
-      title:$scope.title,
-      description:$scope.description,
-      cost:$scope.cost,
-      smallpic:$scope.smallpic,
-      largepic:$scope.largepic
+      id:$scope.portfolio[ptIndex].id, 
+      title:$scope.portfolio[ptIndex].title,
+      description:$scope.portfolio[ptIndex].description,
+      cost:$scope.portfolio[ptIndex].cost,
+      smallpic:$scope.portfolio[ptIndex].smallpic,
+      largepic:$scope.portfolio[ptIndex].largepic
     });
 
-    $location.path('/detail/'+$scope.id);
+    $location.path('/detail/'+$scope.portfolio[ptIndex].id);
   };
 });
 
