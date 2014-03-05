@@ -3,12 +3,24 @@
 </div> 
 
 <div class="details-container">
-  <p><label class="field-label" for="title">Title</label><span id="title">{{portfolio[ptIndex].title}}<br></p>
-  <p><label class="field-label" for="description">Description</label><span id="description">{{portfolio[ptIndex].description}}<br></p>
-  <p><label class="field-label" for="cost">Cost</label><span id="cost">{{portfolio[ptIndex].cost | currency}}<br></p>
-  <p><label class="field-label" for="pid">ID#</label><span id="pid">{{portfolio[ptIndex].id}}<br></p>
-  <p><label class="field-label" for="smallpic">Thumbnail File</label><span id="smallpic">{{portfolio[ptIndex].smallpic}}<br></p>
-  <p><label class="field-label" for="largepic">Large Image File</label><span id="largepic">{{portfolio[ptIndex].largepic}}<br></p>
+  <p><label class="field-label" for="title">Title</label>
+    <span id="title">{{portfolio[ptIndex].title}}<br></p>
+
+  <p><label class="field-label" for="description">Description</label>
+    <span id="description">{{portfolio[ptIndex].description}}<br></p>
+
+  <p><label class="field-label" for="cost">Cost</label>
+    <span id="cost">{{portfolio[ptIndex].cost | currency}}<br></p>
+
+  <p><label class="field-label" for="pid">ID#</label>
+    <span id="pid">{{portfolio[ptIndex].id}}<br></p>
+
+  <p><label class="field-label" for="smallpic">Thumbnail File</label>
+    <span id="smallpic">{{portfolio[ptIndex].smallpic}}<br></p>
+
+  <p><label class="field-label" for="largepic">Large Image File</label>
+    <span id="largepic">{{portfolio[ptIndex].largepic}}<br></p>
+
   <p>
   	<input type="button" value="Edit" ng-click="go('/edit/',portfolio[ptIndex].id)" />
   	<input type="button" value="Add" ng-click="go('/new')" />

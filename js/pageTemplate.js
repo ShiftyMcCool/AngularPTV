@@ -9,11 +9,11 @@ var app=angular.module('myApp', ['ngRoute'],
       templateUrl:'/views/detail.html'
     })
     .when('/edit/:pageTemplateID', {
-      controller:'EditController',
+      controller:'FormController',
       templateUrl:'/views/edit.html'
     })
     .when('/new', {
-      controller:'CreateController',
+      controller:'FormController',
       templateUrl:'/views/edit.html'
     })
     .otherwise({
@@ -33,13 +33,27 @@ app.factory('portfolio', function($http){
         }
       });
     },
-    setPageData: function($scope,id) {
+    getPageTemplate: function($scope,id) {
       angular.forEach($scope.portfolio, function(value, key){
         if(value.id == id){
           $scope.ptIndex = key;
           $scope.thisTemplate = angular.copy($scope.portfolio[key]);
         }
       });
+    },
+    addPageTemplate: function($scope,index) {
+      $scope.portfolio.push({
+        id:$scope.thisTemplate.id, 
+        title:$scope.thisTemplate.title,
+        description:$scope.thisTemplate.description,
+        cost:$scope.thisTemplate.cost,
+        smallpic:$scope.thisTemplate.smallpic,
+        largepic:$scope.thisTemplate.largepic
+      });
+    },
+    updatePageTemplate: function($scope,index) {
+      $scope.portfolio[index] = $scope.thisTemplate;
+      $scope.thisTemplate = "";
     }
   };
 });
@@ -88,33 +102,24 @@ app.controller('PageTemplateController', function($scope,$route,$location,portfo
 });
 
 app.controller('DetailController', function($scope,$routeParams,portfolio) {
-  portfolio.setPageData($scope,$routeParams.pageTemplateID);
+  portfolio.getPageTemplate($scope,$routeParams.pageTemplateID);
 });
 
-app.controller('EditController', function($scope,$routeParams,$location,portfolio) {
-  portfolio.setPageData($scope,$routeParams.pageTemplateID);
+app.controller('FormController', function($scope,$routeParams,portfolio) {
+    portfolio.getPageTemplate($scope,$routeParams.pageTemplateID);
+    var ptIndex = $scope.ptIndex;
 
-  var ptIndex = $scope.ptIndex;
-  
-  $scope.editPageTemplate = function() {
-    $scope.portfolio[ptIndex] = $scope.thisTemplate;
-    $scope.thisTemplate = "";
-    $scope.go('/detail/'+$scope.portfolio[ptIndex].id);
-  };
-});
+  $scope.savePageTemplate = function() {
+    if($scope.portfolio[ptIndex].id == $scope.thisTemplate.id) {
+      portfolio.updatePageTemplate($scope, ptIndex);
+      $scope.go('/detail/'+$scope.portfolio[ptIndex].id);
+    }
+    else {
+      portfolio.addPageTemplate($scope);
+      $scope.go('/detail/'+$scope.thisTemplate.id);
+    }
 
-app.controller('CreateController', function($scope) {
- $scope.addPageTemplate = function() {
-    $scope.portfolio.push({
-      id:$scope.portfolio[ptIndex].id, 
-      title:$scope.portfolio[ptIndex].title,
-      description:$scope.portfolio[ptIndex].description,
-      cost:$scope.portfolio[ptIndex].cost,
-      smallpic:$scope.portfolio[ptIndex].smallpic,
-      largepic:$scope.portfolio[ptIndex].largepic
-    });
-
-    $location.path('/detail/'+$scope.portfolio[ptIndex].id);
+    
   };
 });
 
@@ -123,4 +128,22 @@ app.filter('startFrom', function() {
         start = +start;
         return input.slice(start);
     };
+});
+
+app.directive('onChange', function() {    
+  return {
+    restrict: 'A',
+    scope:{'onChange':'=' },
+    link: function(scope, elm, attrs) {
+      scope.$watch('onChange', function(nVal) { elm.val(nVal); });            
+      elm.bind('blur', function() {
+        var currentValue = elm.val();
+        if( scope.onChange !== currentValue ) {
+          scope.$apply(function() {
+           scope.onChange = currentValue;
+          });
+        }
+      });
+    }
+  };        
 });
