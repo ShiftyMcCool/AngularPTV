@@ -1,12 +1,9 @@
 <!doctype html>
 <html ng-app="myApp">
   <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular-route.js"></script>
-    <script src="/js/xml2json.min.js"></script>
-    <script src="/js/pageTemplate.js"></script>
 
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/toaster.css">
 
     <title>Code Development Project</title>
   </head>
@@ -42,7 +39,20 @@
             <img src="/img/next.png" />
           </button>
         </div>
+
+        <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
       </div>
     </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular-route.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular-animate.js"></script></script>
+    <script src="/lib/xml2json.min.js"></script>
+    <script src="/lib/toaster.js"></script>
+    <script src="/js/pageTemplate.js"></script>
+    <script src="/js/controllers.js"></script>
+    <script src="/js/services.js"></script>
+    <script src="/js/directives.js"></script>
+    <script src="/js/filters.js"></script>
   </body>
 </html>
