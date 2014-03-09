@@ -5,6 +5,7 @@ var ptControllers = angular.module('pageTemplateControllers', ['toaster']);
 ptControllers.controller('PageTemplateController', function($scope,$route,$location,portfolio,toaster) {
   $scope.portfolio = [];
   $scope.ptIndex = 0;
+  $scope.dataSourceUrl = 'http://localhost:8088';
 
   var handleSuccess = function(data, status) {
     $scope.portfolio = data;

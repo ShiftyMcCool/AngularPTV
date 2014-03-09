@@ -5,12 +5,11 @@ var ptServices = angular.module('pageTemplateServices',[]);
 ptServices.factory('portfolio', function($http){
   return {
     getPortfolio: function() {
-      //return $http.get('http://localhost:8088/get', {
-        return $http.get('/xml/PageTemplatePortfolio.xml', {
+      return $http.get('http://localhost:8088/get', {
+        //return $http.get('/xml/PageTemplatePortfolio.xml', {
         transformResponse:function(data) {
           var x2js = new X2JS();
           var json = x2js.xml_str2json( data ).portfolio.pagetemplate;
-          console.log(json);
           return json;
         }
       });
@@ -33,20 +32,35 @@ ptServices.factory('portfolio', function($http){
         largepic:$scope.thisTemplate.largepic
       });
 
-      /*$http.post('http://localhost:8088/save', {portfolio: $scope.portfolio}, function(data, textStatus, xhr) {
-        console.log(data + " ---- " + textStatus + " ---- " + xhr);
-      });*/
+      this.persistData($scope);
     },
     updatePageTemplate: function($scope,index) {
       $scope.portfolio[index] = $scope.thisTemplate;
       $scope.thisTemplate = "";
 
-      /*$http.post('http://localhost:8088/save', {portfolio: $scope.portfolio}).success(function(data, textStatus, xhr) {
-        console.log(data + " ---- " + textStatus + " ---- " + xhr);
-      });*/
+      this.persistData($scope);
     },
     deletePageTemplate: function($scope,index) {
       $scope.portfolio.splice(index,1);
+
+      this.persistData($scope);
+    },
+    persistData: function($scope) {
+      var x2js = new X2JS();
+      var xmlCopy = angular.copy($scope.portfolio);
+      var xml = '<portfolio>';
+
+      for(var x in $scope.portfolio) {
+        xml += '<pagetemplate>'
+        
+        xml += x2js.json2xml_str(xmlCopy[x]);
+
+        xml += '</pagetemplate>'
+      }
+
+      xml += '</portfolio>'
+
+      $http.post($scope.dataSourceUrl + '/save?portfolio=' + xml);
     }
   };
 });
