@@ -66,3 +66,9 @@ ptControllers.controller('FormController', function($scope,$routeParams,portfoli
     }
   };
 });
+
+ptControllers.controller('DeleteController', function($scope,$routeParams,portfolio,toaster){
+  portfolio.deletePageTemplate($scope, $scope.ptIndex);
+  toaster.pop('success', "Success!", "Page Template successfully deleted");
+  $scope.go('/detail/'+$scope.portfolio[0].id);
+});

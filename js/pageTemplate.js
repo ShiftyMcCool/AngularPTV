@@ -24,6 +24,10 @@ var app = angular.module('myApp', [
       controller:'FormController',
       templateUrl:'/views/edit.html'
     })
+    .when('/delete/:pageTemplateID', {
+      controller:'DeleteController',
+      templateUrl:'/views/detail.html'
+    })
     .otherwise({
       redirectTo:'/'
     });
