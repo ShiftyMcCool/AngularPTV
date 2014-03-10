@@ -5,13 +5,13 @@ var ptControllers = angular.module('pageTemplateControllers', ['toaster']);
 ptControllers.controller('PageTemplateController', function($scope,$route,$location,portfolio,toaster) {
   $scope.portfolio = [];
   $scope.ptIndex = 0;
-  $scope.selectedIndex = 0;
   $scope.dataSourceUrl = 'http://localhost:8088';
 
   var handleSuccess = function(data, status) {
     $scope.portfolio = data;
     $scope.currentPage = 0;
     $scope.pageSize = 4;
+    $scope.selectedID = $scope.portfolio[0].id;
   };
 
   portfolio.getPortfolio($scope).success(handleSuccess);
@@ -38,13 +38,13 @@ ptControllers.controller('PageTemplateController', function($scope,$route,$locat
     }
   };
 
-  $scope.activatePageTemplate = function($index) {
-    $scope.selectedIndex = $index;
+  $scope.activatePageTemplate = function(id) {
+    $scope.selectedID = id;
   };
 
-  $scope.go = function ( path,id ) {
-    if(typeof id != 'undefined') {
-      path = path+id;
+  $scope.go = function ( path,arg ) {
+    if(typeof arg != 'undefined') {
+      path = path+arg;
     } 
 
     $location.path( path );
@@ -68,6 +68,7 @@ ptControllers.controller('FormController', function($scope,$routeParams,portfoli
     else {
       portfolio.addPageTemplate($scope);
       toaster.pop('success', "Success!", "Page Template successfully added");
+      $scope.selectedID = $scope.thisTemplate.id;
       $scope.go('/detail/'+$scope.thisTemplate.id);
     }
   };
@@ -76,5 +77,6 @@ ptControllers.controller('FormController', function($scope,$routeParams,portfoli
 ptControllers.controller('DeleteController', function($scope,$routeParams,portfolio,toaster){
   portfolio.deletePageTemplate($scope, $routeParams.pageTemplateIndex);
   toaster.pop('success', "Success!", "Page Template successfully deleted");
+  $scope.selectedID = $scope.portfolio[0].id;
   $scope.go('/detail/'+$scope.portfolio[0].id);
 });

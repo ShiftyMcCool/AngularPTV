@@ -28,7 +28,7 @@
         <div class="carousel-viewport-container" ng-repeat="pagetemplate in portfolio | startFrom:currentPage*pageSize | limitTo:pageSize">
           <div class="carousel-viewport">
               <div class="carousel-item" ng-click="go('/detail/',pagetemplate.id)">
-                <img ng-class="{ 'carousel-img' : 1==1, 'page-template-active': $index == selectedIndex, 'page-template-inactive': $index != selectedIndex }" ng-click="activatePageTemplate($index)" src="/img/thumbnails/{{pagetemplate.smallpic || 'empty.jpg'}}" /><br>
+                <img ng-class="{ 'carousel-img' : 1==1, 'page-template-active': pagetemplate.id == selectedID, 'page-template-inactive': pagetemplate.id != selectedID }" ng-click="activatePageTemplate(pagetemplate.id)" src="/img/thumbnails/{{pagetemplate.smallpic || 'empty.jpg'}}" /><br>
                 <a class="carousel-item-link">{{pagetemplate.title}}</a>                  
               </div>
           </div>
