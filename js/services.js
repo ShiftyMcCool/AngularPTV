@@ -4,8 +4,8 @@ var ptServices = angular.module('pageTemplateServices',[]);
 
 ptServices.factory('portfolio', function($http){
   return {
-    getPortfolio: function() {
-      return $http.get('http://localhost:8088/get', {
+    getPortfolio: function($scope) {
+      return $http.get($scope.dataSourceUrl + '/get', {
         //return $http.get('/xml/PageTemplatePortfolio.xml', {
         transformResponse:function(data) {
           var x2js = new X2JS();

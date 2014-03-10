@@ -5,6 +5,7 @@ var ptControllers = angular.module('pageTemplateControllers', ['toaster']);
 ptControllers.controller('PageTemplateController', function($scope,$route,$location,portfolio,toaster) {
   $scope.portfolio = [];
   $scope.ptIndex = 0;
+  $scope.selectedIndex = 0;
   $scope.dataSourceUrl = 'http://localhost:8088';
 
   var handleSuccess = function(data, status) {
@@ -13,7 +14,7 @@ ptControllers.controller('PageTemplateController', function($scope,$route,$locat
     $scope.pageSize = 4;
   };
 
-  portfolio.getPortfolio().success(handleSuccess);
+  portfolio.getPortfolio($scope).success(handleSuccess);
 
   $scope.prevEnabled = function() {
     if($scope.currentPage == 0) {
@@ -35,6 +36,10 @@ ptControllers.controller('PageTemplateController', function($scope,$route,$locat
       $scope.nextClass = 'page-button';
       return false;
     }
+  };
+
+  $scope.activatePageTemplate = function($index) {
+    $scope.selectedIndex = $index;
   };
 
   $scope.go = function ( path,id ) {
